@@ -1,9 +1,9 @@
 package com.example.service;
 
-import com.example.bank.dto.CadastroDTO;
-import com.example.bank.dto.TransferenciaDTO;
-import com.example.bank.model.Conta;
-import com.example.bank.repository.ContaRepository;
+import com.example.dto.CadastroDTO;
+import com.example.dto.TransferenciaDTO;
+import com.example.model.Conta;
+import com.example.repository.ContaRepository;
 
 import jakarta.inject.Singleton;
 import jakarta.transaction.Transactional;
@@ -22,24 +22,26 @@ public class ContaService {
         conta.setTitular(cadastroDTO.getTitular());
         conta.setEmail(cadastroDTO.getEmail());
         conta.setSenha(cadastroDTO.getSenha());
-        conta = contaRepository.save(conta);
+        Conta savedConta = contaRepository.save(conta);
 
         new Thread(() -> {
             try {
                 Thread.sleep(60000);
-                conta.setSaldo(100.0);
-                contaRepository.update(conta);
+                savedConta.setSaldo(100.0);
+                contaRepository.update(savedConta);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();
 
-        return conta;
+        return savedConta;
     }
 
     public void transferir(TransferenciaDTO transferenciaDTO) {
-        Conta origem = contaRepository.findById(transferenciaDTO.getIdOrigem()).orElseThrow();
-        Conta destino = contaRepository.findById(transferenciaDTO.getIdDestino()).orElseThrow();
+        Conta origem = contaRepository.findById(transferenciaDTO.getIdOrigem())
+                .orElseThrow(() -> new IllegalArgumentException("Conta de origem não encontrada"));
+        Conta destino = contaRepository.findById(transferenciaDTO.getIdDestino())
+                .orElseThrow(() -> new IllegalArgumentException("Conta de destino não encontrada"));
 
         if (origem.getSaldo() < transferenciaDTO.getValor()) {
             throw new IllegalArgumentException("Saldo insuficiente");

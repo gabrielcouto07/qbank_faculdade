@@ -1,9 +1,9 @@
 package com.example.controller;
 
-import com.example.bank.dto.CadastroDTO;
-import com.example.bank.dto.TransferenciaDTO;
-import com.example.bank.model.Conta;
-import com.example.bank.service.ContaService;
+import com.example.dto.CadastroDTO;
+import com.example.dto.TransferenciaDTO;
+import com.example.model.Conta;
+import com.example.service.ContaService;
 
 import io.micronaut.http.annotation.*;
 

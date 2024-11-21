@@ -57,4 +57,24 @@ public class ContaService {
     public Double consultarSaldo(Long id) {
         return contaRepository.findById(id).map(Conta::getSaldo).orElse(0.0);
     }
+
+    public Conta depositar(TransferenciaDTO transferenciaDTO) {
+        Conta conta = contaRepository.findById(transferenciaDTO.getContaId())
+                .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
+    
+        conta.setSaldo(conta.getSaldo() + transferenciaDTO.getValor());
+        return contaRepository.update(conta);
+    }
+
+    public Conta sacar(TransferenciaDTO transferenciaDTO) {
+        Conta conta = contaRepository.findById(transferenciaDTO.getContaId())
+                .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
+    
+        if (conta.getSaldo() < transferenciaDTO.getValor()) {
+            throw new RuntimeException("Saldo insuficiente");
+        }
+    
+        conta.setSaldo(conta.getSaldo() - transferenciaDTO.getValor());
+        return contaRepository.update(conta);
+    }
 }

@@ -3,6 +3,7 @@ package com.example.dto;
 public class TransferenciaDTO {
     private Long idOrigem;
     private Long idDestino;
+    private Long contaId;
     private Double valor;
 
     public Long getIdOrigem() {
@@ -19,6 +20,14 @@ public class TransferenciaDTO {
 
     public void setIdDestino(Long idDestino) {
         this.idDestino = idDestino;
+    }
+
+    public Long getContaId() { 
+        return contaId;
+    }
+
+    public void setContaId(Long contaId) { 
+        this.contaId = contaId;
     }
 
     public Double getValor() {

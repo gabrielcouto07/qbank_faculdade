@@ -1,5 +1,8 @@
 package com.example.dto;
 
+import io.micronaut.serde.annotation.Serdeable;
+
+@Serdeable
 public class CadastroDTO {
     private String titular;
     private String email;

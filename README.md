@@ -71,7 +71,7 @@ Para executar o projeto, você precisará de:
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/gabrielcouto07/Qbank
+git clone https://github.com/nunes262/qbank_faculdade
 cd Qbank
 
 

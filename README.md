@@ -72,6 +72,6 @@ Para executar o projeto, você precisará de:
 
 ```bash
 git clone https://github.com/nunes262/qbank_faculdade
-cd Qbank
+cd qbank_faculdade
 
 
